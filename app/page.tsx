@@ -13,13 +13,30 @@ export default async function Home() {
     redirect("/login");
   }
 
-  const category = await prisma.category.findMany();
+  const userEmail = session.user?.email;
 
+  if (!userEmail) {
+    return { success: false, error: "User email not found" };
+  }
+
+  const user = await prisma.user.findUnique({
+    where: { email: userEmail },
+  });
+
+  if (!user) {
+    return { success: false, error: "User not found" };
+  }
+  
+  const category = await prisma.category.findMany({
+    where: { userId: user.id },
+  });
   const categoryList = await prisma.category.findMany({
+    where: { userId: user.id },
     include: {
       time: true,
     },
   });
+
   return (
     <div className="px-4 md:px-[5rem] lg:px-[10rem] xl:px-[20rem] pt-14">
       <div className="flex flex-col md:flex-row gap-5 mb-3">
