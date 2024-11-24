@@ -40,6 +40,6 @@ model Time {
   duration   Int
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-  category   Category @relation(fields: [categoryId], references: [id])
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   categoryId String
 }
