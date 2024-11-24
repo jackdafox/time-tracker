@@ -1,4 +1,4 @@
-"use server"
+"use server";
 import { CategorySchema, TimeSchema } from "@/lib/form_schema";
 import prisma from "@/lib/prisma";
 import { getServerSession } from "next-auth";
@@ -82,6 +82,20 @@ export const addCategory = async (formData: z.infer<typeof CategorySchema>) => {
     return { success: false, error: "Failed to create category" };
   } catch {
     return { success: false, error: "Failed to try" };
+  }
+};
+
+export const deleteCategory = async (id: string) => {
+  try {
+    const category = await prisma.category.delete({
+      where: { id: id },
+    });
+
+    revalidatePath("/");
+
+    return { success: true, data: category };
+  } catch {
+    return { success: false, error: "Failed to delete category" };
   }
 };
 

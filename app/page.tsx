@@ -6,6 +6,7 @@ import CategoryDialog from "@/components/dialog/CategoryDialog";
 import SortTimeTable from "@/components/tables/SortTimeTable";
 import { authOptions } from "@/lib/auth";
 import SignOut from "@/components/buttons/SignOut";
+import DeleteDialog from "@/components/dialog/DeleteDialog";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
@@ -31,6 +32,7 @@ export default async function Home() {
   const category = await prisma.category.findMany({
     where: { userId: user.id },
   });
+  
   const categoryList = await prisma.category.findMany({
     where: { userId: user.id },
     include: {
@@ -48,6 +50,7 @@ export default async function Home() {
         <div className="flex gap-2">
           <SubmitDialog category={category} />
           <CategoryDialog />
+          <DeleteDialog category={category} />
         </div>
       </div>
       <p className="text-[1rem] md:text-[1.2rem] mt-2 mb-9">
