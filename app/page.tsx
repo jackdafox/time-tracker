@@ -1,10 +1,10 @@
 import SubmitDialog from "@/components/dialog/SubmitDialog";
 import prisma from "@/lib/prisma";
 import { getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import CategoryDialog from "@/components/dialog/CategoryDialog";
 import SortTimeTable from "@/components/tables/SortTimeTable";
+import { authOptions } from "@/lib/auth";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
