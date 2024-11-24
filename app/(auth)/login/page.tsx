@@ -2,7 +2,7 @@
 
 import { signIn } from "next-auth/react";
 import { useState } from "react";
-import { useRouter } from "next/router";
+import { redirect } from "next/navigation";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -10,15 +10,13 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const router = useRouter();
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setError("");
 
     const result = await signIn("credentials", {
-      redirect: false,
+      redirect: true,
       email,
       password,
     });
@@ -26,9 +24,9 @@ export default function LoginPage() {
     setLoading(false);
 
     if (result?.error) {
-      setError(result.error);
+      setError("Wrong Credentials");
     } else {
-      router.push("/");
+      redirect("/");
     }
   };
 
