@@ -1,3 +1,4 @@
+"use client"
 import { Category } from "@prisma/client";
 import React from "react";
 import {
