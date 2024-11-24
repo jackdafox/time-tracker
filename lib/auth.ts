@@ -1,5 +1,5 @@
 import prisma from '@/lib/prisma'
-import { compare } from 'bcryptjs'
+import { compare } from 'bcrypt'
 import { type NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 
@@ -59,7 +59,6 @@ export const authOptions: NextAuthOptions = {
         user: {
           ...session.user,
           id: token.id,
-          randomKey: token.randomKey
         }
       }
     },

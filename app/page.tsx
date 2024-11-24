@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import CategoryDialog from "@/components/dialog/CategoryDialog";
 import SortTimeTable from "@/components/tables/SortTimeTable";
 import { authOptions } from "@/lib/auth";
+import SignOut from "@/components/buttons/SignOut";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
@@ -43,6 +44,7 @@ export default async function Home() {
         <h1 className="text-[2rem] md:text-[3rem] font-semibold tracking-tighter leading-[0.75]">
           Time Tracker
         </h1>
+        <SignOut />
         <div className="flex gap-2">
           <SubmitDialog category={category} />
           <CategoryDialog />

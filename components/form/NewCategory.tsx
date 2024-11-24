@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import {
   Form,
@@ -36,11 +36,11 @@ const NewCategory = () => {
 
     const result = await addCategory(validatedData);
 
-    if(result) {
+    if (result) {
       toast({
         title: "Category added",
         description: result.data?.name,
-      })
+      });
     }
 
     if (!result) {
@@ -79,4 +79,3 @@ const NewCategory = () => {
 };
 
 export default NewCategory;
-
