@@ -22,12 +22,14 @@ export default function LoginPage() {
       password,
     });
 
+    console.log(result);
+
     setLoading(false);
 
     if (result && !result.error) {
-      setError("Wrong Credentials");
+      router.push("/");
     } else {
-      router.push("/"); // Redirect to the homepage after successful login
+      setError("Wrong Credentials")
     }
   };
 
