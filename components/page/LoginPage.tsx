@@ -1,7 +1,7 @@
 "use client"
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/router";
-import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
