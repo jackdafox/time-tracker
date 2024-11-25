@@ -3,7 +3,6 @@ import { Category } from "@prisma/client";
 import React from "react";
 import {
   Table,
-  TableCaption,
   TableHeader,
   TableBody,
   TableRow,
@@ -26,7 +25,6 @@ const DeleteCategory = ({ category }: { category: Category[] }) => {
   }
   return (
     <Table>
-      <TableCaption>A list of your recent invoices.</TableCaption>
       <TableHeader>
         <TableRow>
           <TableHead>Category</TableHead>
