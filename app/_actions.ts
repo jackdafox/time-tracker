@@ -5,6 +5,7 @@ import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { authOptions } from "@/lib/auth";
+import { getProviders } from "next-auth/react";
 
 type Inputs = z.infer<typeof TimeSchema>;
 
@@ -98,6 +99,18 @@ export const deleteCategory = async (id: string) => {
     return { success: false, error: "Failed to delete category" };
   }
 };
+
+export const getProviderGoogle = async () => {
+  const session = await getServerSession(authOptions);
+
+  if (session) {
+    return {redirect: { destination: '/', permanent: false }};
+  }
+
+  const providers = await getProviders();
+
+  return providers;
+}
 
 const calculateDuration = (
   durationH: number,

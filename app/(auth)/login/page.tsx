@@ -4,6 +4,7 @@ import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
+
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -32,6 +33,17 @@ export default function LoginPage() {
       setError("Wrong Credentials")
     }
   };
+
+  const handleGoogleSignIn = async () => {
+    const result = await signIn("google", {
+      callbackUrl: "/",
+    });
+
+    if (result && !result.error) {
+      router.push("/");
+    }
+  }
+
 
   return (
     <div className="flex items-center justify-center min-h-screen">
@@ -93,7 +105,16 @@ export default function LoginPage() {
             disabled={loading}
           >
             {loading ? "Signing In..." : "Log in"}
+
+            
           </button>
+          <button
+          onClick={handleGoogleSignIn}
+          className="w-full mt-4 p-4 text-white bg-black hover:bg-gray-800"
+          disabled={loading}
+        >
+          {loading ? "Signing In..." : "Sign in with Google"}
+        </button>
         </form>
       </div>
     </div>
