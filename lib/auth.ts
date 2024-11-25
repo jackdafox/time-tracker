@@ -61,7 +61,11 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async signIn({ profile }) {
+    async signIn({ account, profile, }) {
+      if (account && account.provider === "credentials") {
+        return true;
+      }
+
       if (!profile || !profile.email) {
         throw new Error("No profile");
       }
