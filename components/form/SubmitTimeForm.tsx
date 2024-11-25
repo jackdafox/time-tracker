@@ -78,7 +78,7 @@ const SubmitTimeForm = ({ category }: SubmitTimeFormProps) => {
             name="categoryID"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel>Category</FormLabel>
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
