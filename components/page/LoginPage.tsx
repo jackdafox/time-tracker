@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -50,10 +50,7 @@ const LoginPage = () => {
         </h1>
         <p className="text-center text-sm text-gray-600 mb-6">
           Don&apos;t have an account?{" "}
-          <a
-            href="/register"
-            className="text-black font-semibold underline"
-          >
+          <a href="/register" className="text-black font-semibold underline">
             Sign Up
           </a>
         </p>
@@ -101,17 +98,15 @@ const LoginPage = () => {
             disabled={loading}
           >
             {loading ? "Signing In..." : "Log in"}
-
-            
           </button>
-          <button
+        </form>
+        <button
           onClick={handleGoogleSignIn}
           className="w-full mt-4 p-4 text-white bg-black hover:bg-gray-800"
           disabled={loading}
         >
           {loading ? "Signing In..." : "Sign in with Google"}
         </button>
-        </form>
       </div>
     </div>
   );
