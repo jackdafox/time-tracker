@@ -112,6 +112,16 @@ export const getProviderGoogle = async () => {
   return providers;
 }
 
+export const getSession = async () => {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    return null;
+  }
+
+  return session;
+}
+
 const calculateDuration = (
   durationH: number,
   durationM: number,
