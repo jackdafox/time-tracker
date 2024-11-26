@@ -8,6 +8,9 @@ import {
   TableRow,
 } from "../ui/table";
 import { Category, Time } from "@prisma/client";
+import { Button } from "../ui/button";
+import { deleteTime } from "@/app/_actions";
+import { toast } from "@/hooks/use-toast";
 
 interface DisplayTimeTableProps {
   category: (Category & {
@@ -16,6 +19,15 @@ interface DisplayTimeTableProps {
 }
 
 const DisplayTimeTable = ({ category }: DisplayTimeTableProps) => {
+  async function handleDelete(id: string) {
+    const result = await deleteTime(id);
+    if (result) {
+      toast({
+        title: "Category deleted",
+        description: result.data?.activity,
+      });
+    }  
+  }
   return (
     <div className="overflow-x-auto">
       <Table className="min-w-full">
@@ -24,7 +36,7 @@ const DisplayTimeTable = ({ category }: DisplayTimeTableProps) => {
             <TableHead className="w-[100px]">Category</TableHead>
             <TableHead>Activity</TableHead>
             <TableHead>Time Spent</TableHead>
-            <TableHead className="text-right">Date</TableHead>
+            <TableHead className="text-right">Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -35,7 +47,7 @@ const DisplayTimeTable = ({ category }: DisplayTimeTableProps) => {
                 <TableCell>{time.activity}</TableCell>
                 <TableCell>{calculateDuration(time.duration)}</TableCell>
                 <TableCell className="text-right">
-                  {new Date(time.createdAt).toLocaleDateString()}
+                  <Button onClick={() => handleDelete(time.id)}>Delete</Button>
                 </TableCell>
               </TableRow>
             ))

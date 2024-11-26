@@ -100,6 +100,20 @@ export const deleteCategory = async (id: string) => {
   }
 };
 
+export const deleteTime = async (id: string) => {
+  try {
+    const time = await prisma.time.delete({
+      where: { id: id },
+    });
+
+    revalidatePath("/");
+
+    return { success: true, data: time };
+  } catch {
+    return { success: false, error: "Failed to delete time" };
+  }
+}
+
 export const getProviderGoogle = async () => {
   const session = await getServerSession(authOptions);
 
